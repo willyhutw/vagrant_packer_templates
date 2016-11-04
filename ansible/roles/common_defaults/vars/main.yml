@@ -1,0 +1,18 @@
+---
+
+#Password: vagrant
+root_password: $6$rounds=100000$Mmz1TJ0OPf8eiT9y$tGD.DPtZTsI96Kx.xeBXzLAeOHNHZDkFmZQzKe23Iv2QBQ9EBNIREp0Gr38gNowxE9X.Vapqkl5a7vx4tdZsl/
+
+common_packages:
+  - acpid
+  - curl
+  - logrotate
+  - ntp
+  - ntpdate
+  - openssh-server
+  - rsync
+  - telnet
+  - tmux
+
+enable_boot_services:
+  - acpid
