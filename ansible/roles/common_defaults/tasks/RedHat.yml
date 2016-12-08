@@ -134,3 +134,26 @@
     dest: /etc/rsyslog.d/ignore-systemd-session-slice.conf
   tags:
     - syslog
+
+- name: install develop tools for ansible
+  yum:
+    name: "@Development tools"
+    state: present
+
+- name: install packages
+  yum:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - python-devel
+    - python-pip
+    - libffi-devel
+    - openssl-devel
+    - sshpass
+    - git
+
+- name: install ansible
+  pip:
+    name: ansible
+    state: present
+

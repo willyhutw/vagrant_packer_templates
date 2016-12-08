@@ -4,7 +4,7 @@ export USER="willyhu"
 export TMPDIR="/var/tmp/"
 export VERSION="$(date +%Y%m%d).01"
 export ATLAS_TOKEN="CEkrX3I6lPqBGw.atlasv1.PlyK4v7zfFV4DYSEMlYjfQ7bZbBh9vyQnfyoBs6irKWicPJTUR1l2TEXXpKIQxPOwvc"
-#export PACKER_LOG=1
+export PACKER_LOG=1
 export LOG_DIR="./build_logs/"
 
 
@@ -58,7 +58,7 @@ packer_build() {
   /usr/local/bin/packer build -color=false $PACKER_FILE | tee "${LOG_DIR}/${NAME}-packer.log"
   create_atlas_box
   upload_boxfile_to_atlas
-  #rm -v ${NAME}-libvirt.box
+  rm -v ${NAME}-libvirt.box
 }
 
 build_ubuntu_16_04() {
@@ -101,8 +101,8 @@ build_centos7() {
 #######
 
 main() {
-  #build_centos7
-  build_ubuntu_16_04
+  build_centos7
+  #build_ubuntu_16_04
 }
 
 main
