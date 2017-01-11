@@ -1,0 +1,64 @@
+{
+  "_comment": "Build with `NAME=CentOS-7-amd64 CENTOS_VERSION=7 CENTOS_TYPE=NetInstall CENTOS_ARCH=x86_64 CENTOS_TAG=1511 packer build centos7.json`",
+  "variables": {
+    "name": "{{ env `NAME` }}",
+    "centos_type": "{{ env `CENTOS_TYPE` }}",
+    "centos_version": "{{ env `CENTOS_VERSION` }}",
+    "centos_arch": "{{ env `CENTOS_ARCH` }}",
+    "centos_tag": "{{ env `CENTOS_TAG` }}",
+    "centos_mirror": "http://ftp.isu.edu.tw/pub/Linux/CentOS/",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "preseed_file_name": "ks.cfg",
+    "disk_size": "65536"
+  },
+
+  "builders":
+  [
+    {
+      "name": "{{ user `name` }}",
+      "type": "virtualbox-iso",
+      "iso_checksum_type": "sha256",
+      "iso_checksum_url": "{{ user `centos_mirror` }}{{ user `centos_version` }}/isos/{{ user `centos_arch` }}/sha256sum.txt",
+      "iso_urls": [ "{{ user `centos_mirror` }}{{ user `centos_version` }}/isos/{{ user `centos_arch` }}/CentOS-{{ user `centos_version` }}-{{ user `centos_arch` }}-{{ user `centos_type` }}-{{ user `centos_tag` }}.iso" ],
+      "ssh_username": "{{ user `ssh_username` }}",
+      "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "60m",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+      "boot_wait": "10s",
+      "boot_command":
+      [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos{{ user `centos_version` }}/ks.cfg<enter>"
+      ],
+      "disk_size": "{{ user `disk_size` }}",
+      "http_directory": "http"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash -x '{{.Path}}'",
+      "scripts": [
+        "scripts/linux-common/vagrant.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash -x '{{.Path}}'",
+      "scripts": [
+        "scripts/linux-common/cleanup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "vagrant",
+        "compression_level": 9,
+        "vagrantfile_template": "Vagrantfile-linux.template",
+        "output": "{{ user `name` }}-{{.Provider}}.box"
+      }
+    ]
+  ]
+}

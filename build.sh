@@ -61,29 +61,18 @@ packer_build() {
   rm -v ${NAME}-libvirt.box
 }
 
-build_ubuntu_16_04() {
+export_ubuntu16() {
   export UBUNTU_VERSION="16.04.1"
+  export UBUNTU_MAIN_VERSION="16"
   export UBUNTU_ARCH="amd64"
   export UBUNTU_TYPE="server"
   export NAME="ubuntu-${UBUNTU_VERSION::5}-${UBUNTU_TYPE}-${UBUNTU_ARCH}"
   export DESCRIPTION=$(render_template ubuntu-${UBUNTU_TYPE}.md)
   export SHORT_DESCRIPTION="Ubuntu ${UBUNTU_VERSION::5} ${UBUNTU_TYPE} (${UBUNTU_ARCH}) for libvirt"
 
-  packer_build ubuntu-${UBUNTU_TYPE}.json
 }
 
-build_ubuntu_14_04() {
-  export UBUNTU_VERSION="14.04.5"
-  export UBUNTU_ARCH="amd64"
-  export UBUNTU_TYPE="server"
-  export NAME="ubuntu-${UBUNTU_VERSION::5}-${UBUNTU_TYPE}-${UBUNTU_ARCH}"
-  export DESCRIPTION=$(render_template ubuntu-${UBUNTU_TYPE}.md)
-  export SHORT_DESCRIPTION="Ubuntu ${UBUNTU_VERSION::5} ${UBUNTU_TYPE} (${UBUNTU_ARCH}) for libvirt"
-
-  packer_build ubuntu-${UBUNTU_TYPE}.json
-}
-
-build_centos7() {
+export_centos7() {
   export CENTOS_VERSION="7"
   export CENTOS_TAG="1511"
   export CENTOS_ARCH="x86_64"
@@ -92,17 +81,17 @@ build_centos7() {
   export DESCRIPTION=$(render_template my-centos${CENTOS_VERSION}.md)
   export SHORT_DESCRIPTION="CentOS ${CENTOS_VERSION} ${CENTOS_ARCH} for libvirt"
 
-  packer_build centos${CENTOS_VERSION}.json
 }
-
 
 #######
 # Main
 #######
 
-main() {
-  build_centos7
-  #build_ubuntu_16_04
-}
+export_ubuntu16
+packer_build ubuntu${UBUNTU_MAIN_VERSION}-virtualbox.json
+#packer_build ubuntu${UBUNTU_MAIN_VERSION}-libvirt.json
 
-main
+#export_centos7
+#packer_build centos${CENTOS_VERSION}-virtualbox.json
+#packer_build centos${CENTOS_VERSION}-libvirt.json
+
