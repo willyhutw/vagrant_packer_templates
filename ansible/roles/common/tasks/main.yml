@@ -1,0 +1,9 @@
+---
+# tasks file for roles/common
+
+- name: (common) | install python-simplejson prevent /usr/bin/python not found error
+  apt:
+    name: python-simplejson
+    state: present
+  when: ansible_os_family == "Debian"
+
