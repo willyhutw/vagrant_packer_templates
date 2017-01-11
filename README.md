@@ -1,9 +1,10 @@
-### === building vagrant box with packer ===
+### building vagrant box with packer
 
+<br/>
 ```
-packer build <code>ubuntu16-virtualbox.json</code>
-
+packer build ubuntu16-virtualbox.json
 ```
+<br/>
 
 - available packer json files in this project:
   - centos7-virtualbox.json
