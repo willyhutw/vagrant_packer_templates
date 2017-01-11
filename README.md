@@ -1,9 +1,13 @@
-### a rough script for building vagrant box with packer
+### = a rough script for building vagrant box with packer =
+<br/>
+<br/>
 
-### before you run
+### = before you run =
 edit build.sh
 
 then just run <code>./build.sh</code>
+<br/>
+<br/>
 
 ```
 .
