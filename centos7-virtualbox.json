@@ -1,11 +1,11 @@
 {
-  "_comment": "Build with `NAME=CentOS-7-amd64 CENTOS_VERSION=7 CENTOS_TYPE=NetInstall CENTOS_ARCH=x86_64 CENTOS_TAG=1511 packer build centos7.json`",
+  "_comment": "Build with `NAME=centos-7-x86_64 CENTOS_VERSION=7 CENTOS_TYPE=NetInstall CENTOS_ARCH=x86_64 CENTOS_TAG=1511 packer build centos7.json`",
   "variables": {
-    "name": "{{ env `NAME` }}",
-    "centos_type": "{{ env `CENTOS_TYPE` }}",
-    "centos_version": "{{ env `CENTOS_VERSION` }}",
-    "centos_arch": "{{ env `CENTOS_ARCH` }}",
-    "centos_tag": "{{ env `CENTOS_TAG` }}",
+    "name": "centos-7-x86_64",
+    "centos_type": "NetInstall",
+    "centos_version": "7",
+    "centos_arch": "x86_64",
+    "centos_tag": "1511",
     "centos_mirror": "http://ftp.isu.edu.tw/pub/Linux/CentOS/",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
@@ -64,7 +64,6 @@
       {
         "type": "vagrant",
         "compression_level": 9,
-        "vagrantfile_template": "Vagrantfile-linux.template",
         "output": "{{ user `name` }}-{{.Provider}}.box"
       }
     ]

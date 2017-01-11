@@ -1,33 +1,13 @@
-### = a rough script for building vagrant box with packer =
-<br/>
-<br/>
-
-### = before you run =
-edit build.sh
-
-then just run <code>./build.sh</code>
-<br/>
-<br/>
+### === building vagrant box with packer ===
 
 ```
-.
-|-- Vagrantfile-linux.template
-|-- http
-|   |-- centos
-|   |   `-- ks.cfg
-|   `-- ubuntu
-|       `-- preseed.cfg
-|-- scripts
-|   |-- linux-common
-|   |   |-- cleanup.sh
-|   |   `-- vagrant.sh
-|   `-- ubuntu
-|       `-- update.sh
-|-- build.sh
-|-- centos7-libvirt.json
-|-- centos7-virtualbox.json
-|-- ubuntu16-libvirt.json
-`-- ubuntu16-virtualbox.json
+packer build <code>ubuntu16-virtualbox.json</code>
 
 ```
+
+- available packer json files in this project:
+  - centos7-virtualbox.json
+  - ubuntu16-virtualbox.json
+  - centos7-libvirt.json
+  - ubuntu16-libvirt.json
 
