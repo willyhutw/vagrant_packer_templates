@@ -17,6 +17,7 @@
     {
       "name": "{{ user `name` }}",
       "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu_64",
       "iso_checksum_type": "sha256",
       "iso_checksum_url": "{{ user `ubuntu_mirror` }}{{ user `ubuntu_version` }}/SHA256SUMS",
       "iso_urls": [ "{{ user `ubuntu_mirror` }}{{ user `ubuntu_version` }}/{{ user `iso_name` }}.iso" ],
