@@ -30,7 +30,7 @@
       "boot_wait": "10s",
       "boot_command":
       [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos{{ user `centos_version` }}/ks.cfg<enter>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos/ks.cfg<enter>"
       ],
       "disk_size": "{{ user `disk_size` }}",
       "http_directory": "http"
