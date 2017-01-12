@@ -51,6 +51,7 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash -x '{{.Path}}'",
       "scripts": [
         "scripts/ubuntu/update.sh",
+        "scripts/ubuntu/virtualbox.sh",
         "scripts/linux-common/vagrant.sh"
       ]
     },
